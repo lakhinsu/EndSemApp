@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">EndSemApp</string>
+
+    <string-array name="Algorithm">
+        <item>Winter2015-ADA</item>
+        <item>Summer2016-ADA</item>
+        <item>Summer2017-ADA</item>
+        <item>Winter2017-ADA</item>
+        <item>Summer2018-ADA</item>
+        <item>ADA_Darshan</item>
+
+    </string-array>
+
+    <string-array name="Computer_Graphics">
+        <item>Winter2015-CG</item>
+        <item>Summer2016-CG</item>
+        <item>Winter2016-CG</item>
+        <item>Summer2017-CG</item>
+        <item>Winter2017-CG</item>
+        <item>Summer2018-CG</item>
+        <item>CG_Darshan</item>
+    </string-array>
+
+    <string-array name="Systems_Prog">
+        <item>Winter2015-SP</item>
+        <item>Summer2016-SP</item>
+        <item>Winter2016-SP</item>
+        <item>Summer2017-SP</item>
+        <item>Winter2017-SP</item>
+        <item>Summer2018-SP</item>
+        <item>SP_Darshan</item>
+    </string-array>
+
+    <string-array name="Java">
+        <item>Winter2015-JAVA</item>
+        <item>Summer2016-JAVA</item>
+        <item>Winter2016-JAVA</item>
+        <item>Summer2017-JAVA</item>
+        <item>Winter2017-JAVA</item>
+        <item>Summer2018-JAVA</item>
+        <item>Java_Darshan</item>
+    </string-array>
+    <string name="title_activity_subject">Subject</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_tab1_fragment">Tab1Fragment</string>
+    <string name="title_activity_pdf_viewer">PdfViewer</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+</resources>
