@@ -1,5 +1,7 @@
 package com.example.lak.endsemapp;
 
+import android.app.usage.UsageEvents;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,14 +9,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.listener.OnTapListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.shockwave.pdfium.PdfDocument;
@@ -31,12 +37,18 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
 
     SharedPreferences sharedpreferences;
 
+    SharedPreferences sharedPreferences2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pdf_viewer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        hideSystemUI();
+
 
         Bundle extras=getIntent().getExtras();
 
@@ -47,6 +59,14 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
             CharSequence savedText = savedInstanceState.getCharSequence("pagenum");
             String pn=""+savedText;
             pageNumber=Integer.parseInt(pn);
+        }
+
+        sharedPreferences2=getSharedPreferences("PAGES", Context.MODE_PRIVATE);
+
+        if(sharedPreferences2.contains(filename)){
+            String NM=sharedPreferences2.getString(filename,"");
+            pageNumber=Integer.parseInt(NM);
+            Log.d("SavingPages","Read"+filename+" "+pageNumber);
         }
 
 
@@ -89,11 +109,15 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
                 .load();
     }
 
+
     @Override
     public void onPageChanged(int page, int pageCount) {
         pageNumber = page;
+        hideSystemUI();
         setTitle(String.format("%s %s / %s", pdfFileName, page + 1, pageCount));
     }
+
+
 
     @Override
     public void loadComplete(int nbPages) {
@@ -112,15 +136,6 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
             }
         }
     }
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main5);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -153,9 +168,34 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
         }
         else
         {
-            Toast.makeText(getApplicationContext(),"PLease Select a file !",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"PLease Select a file !",Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPreferences2=getSharedPreferences("PAGES", Context.MODE_PRIVATE);
+        SharedPreferences.Editor data= sharedPreferences2.edit();
+        data.putString(filename,""+pageNumber);
+        data.commit();
+        Log.d("SavingPages","Written"+filename+" "+pageNumber);
+    }
+    private void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
 
 }

@@ -117,6 +117,8 @@ public class AdaTopics {
         chapter9.add("Hamiltonian problem");
         chapter9.add("Approximation algorithms");
 
+        //70
+
 
         listDataChild.put(listDataHeader.get(0),chapter1);
         listDataChild.put(listDataHeader.get(1),chapter2);

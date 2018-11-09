@@ -19,6 +19,7 @@
         <item>Winter2017-CG</item>
         <item>Summer2018-CG</item>
         <item>CG_Darshan</item>
+        <item>CG_Important</item>
     </string-array>
 
     <string-array name="Systems_Prog">
@@ -29,6 +30,7 @@
         <item>Winter2017-SP</item>
         <item>Summer2018-SP</item>
         <item>SP_Darshan</item>
+        <item>SP_Important</item>
     </string-array>
 
     <string-array name="Java">

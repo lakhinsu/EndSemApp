@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -25,13 +26,15 @@ import java.util.List;
 public class tab2fragment extends Fragment{
     public static final String TAG="Topics";
 
-    ExpListViewAdapterWithCheckbox listAdapter;
+    static ExpListViewAdapterWithCheckbox listAdapter;
     ExpandableListView expListView;
     ArrayList<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
+    static int count,tcount;
+
     String Name;
-    TextView footer;
+    static TextView footer;
 
 
     @Nullable
@@ -57,9 +60,14 @@ public class tab2fragment extends Fragment{
         listAdapter = new ExpListViewAdapterWithCheckbox(getContext(), listDataHeader, listDataChild);
 
         listAdapter.loadStates(Name);
+        count=listAdapter.getAllCheckedCount();
+
+        footer.setText("Progress:"+count+"/"+tcount);
+
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
+
 
         // Listview Group click listener
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -95,15 +103,7 @@ public class tab2fragment extends Fragment{
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 // TODO Auto-generated method stub
-                Toast.makeText(
-                        getContext().getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
-                return false;
+                return true;
             }
         });
 
@@ -119,6 +119,7 @@ public class tab2fragment extends Fragment{
             //listDataChild = new HashMap<String, List<String>>();
             listDataHeader = adaTopics.listDataHeader;
             listDataChild = adaTopics.listDataChild;
+            tcount=70;
         }
         else if(Name.equals("Computer_Graphics")){
             CgTopics cgTopics=new CgTopics();
@@ -127,6 +128,7 @@ public class tab2fragment extends Fragment{
             //listDataChild = new HashMap<String, List<String>>();
             listDataHeader=cgTopics.listDataHeader;
             listDataChild=cgTopics.listDataChild;
+            tcount=62;
         }
         else if(Name.equals("Java")){
             JavaTopics javaTopics=new JavaTopics();
@@ -135,12 +137,14 @@ public class tab2fragment extends Fragment{
             listDataChild=javaTopics.listDataChild;
             //Log.d("Size",""+listDataChild.keySet());
             //Log.d("Size",""+listDataChild.get("Basics of Java").size());
+            tcount=111;
         }
         else if(Name.equals("Systems_Prog.")){
             SpTopics spTopics=new SpTopics();
             spTopics.prepareList();
             listDataChild=spTopics.listDataChild;
             listDataHeader=spTopics.listDataHeader;
+            tcount=84;
         }
     }
     @Override
@@ -153,6 +157,13 @@ public class tab2fragment extends Fragment{
     public void onPause() {
         listAdapter.saveStates(Name);
         super.onPause();
+    }
+
+    static void updateProgress()
+    {
+        count=listAdapter.getAllCheckedCount();
+        footer.setText("Progress:"+count+"/"+tcount);
+
     }
 
 

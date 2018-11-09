@@ -86,6 +86,17 @@ public class ExpListViewAdapterWithCheckbox extends BaseExpandableListAdapter {
         return  count;
     }
 
+    public int getAllCheckedCount()
+    {
+        int gcount=getGroupCount();
+        int count=0;
+        for(int i=0;i<gcount;i++){
+            count+=getNumberOfCheckedItemsInGroup(i);
+        }
+        return count;
+
+    }
+
     @Override
     public int getGroupCount() {
         return mListDataGroup.size();
@@ -253,6 +264,7 @@ public class ExpListViewAdapterWithCheckbox extends BaseExpandableListAdapter {
                         getChecked[mChildPosition] = isChecked;
                         mChildCheckStates.put(mGroupPosition, getChecked);
                     }
+                    tab2fragment.updateProgress();
             }
         });
 
