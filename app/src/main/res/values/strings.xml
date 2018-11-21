@@ -8,30 +8,13 @@
         <item>Winter2017-ADA</item>
         <item>Summer2018-ADA</item>
         <item>ADA_Darshan</item>
+        <item>ADA_Important</item>
 
     </string-array>
 
-    <string-array name="Computer_Graphics">
-        <item>Winter2015-CG</item>
-        <item>Summer2016-CG</item>
-        <item>Winter2016-CG</item>
-        <item>Summer2017-CG</item>
-        <item>Winter2017-CG</item>
-        <item>Summer2018-CG</item>
-        <item>CG_Darshan</item>
-        <item>CG_Important</item>
-    </string-array>
 
-    <string-array name="Systems_Prog">
-        <item>Winter2015-SP</item>
-        <item>Summer2016-SP</item>
-        <item>Winter2016-SP</item>
-        <item>Summer2017-SP</item>
-        <item>Winter2017-SP</item>
-        <item>Summer2018-SP</item>
-        <item>SP_Darshan</item>
-        <item>SP_Important</item>
-    </string-array>
+
+
 
     <string-array name="Java">
         <item>Winter2015-JAVA</item>

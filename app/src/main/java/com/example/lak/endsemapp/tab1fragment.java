@@ -53,18 +53,11 @@ public class tab1fragment extends Fragment {
         paperlist=getResources().getStringArray(R.array.Algorithm);  //By Default ADA
 
         final ArrayAdapter<String> papername;
-
-        if(Sname.equals("Computer_Graphics")){
-            paperlist=getResources().getStringArray(R.array.Computer_Graphics);
-        }
-        else if(Sname.equals("Algorithms")){
+        if(Sname.equals("Algorithms")){
             paperlist=getResources().getStringArray(R.array.Algorithm);
         }
         else if(Sname.equals("Java")){
             paperlist=getResources().getStringArray(R.array.Java);
-        }
-        else if(Sname.equals("Systems_Prog.")){
-            paperlist=getResources().getStringArray(R.array.Systems_Prog);
         }
         papername=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, paperlist){
             @Override
